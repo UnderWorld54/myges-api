@@ -65,8 +65,56 @@ npm run docker:down
 ```
 mon-api/
 ├── src/           
+│   ├── config/         # Configuration (database, etc.)
+│   ├── controllers/    # Contrôleurs pour la logique métier
+│   ├── middleware/     # Middleware (auth, error handling)
+│   ├── models/         # Modèles de données
+│   ├── routes/         # Définition des routes
+│   ├── services/       # Services métier
+│   ├── types/          # Types TypeScript
+│   ├── utils/          # Utilitaires
+│   └── app.ts          # Point d'entrée de l'application
 ├── docker-compose.yml
 ├── package.json
 ├── tsconfig.json
 └── README.md
 ```
+
+## Routes API
+
+### Routes d'authentification (`/api/auth`)
+- `POST /api/auth/register` - Inscription d'un nouvel utilisateur
+- `POST /api/auth/login` - Connexion utilisateur
+- `GET /api/auth/profile` - Récupérer le profil de l'utilisateur connecté (protégé)
+- `PUT /api/auth/change-password` - Changer le mot de passe (protégé)
+
+### Routes utilisateurs (`/api/users`)
+- `GET /api/users` - Liste tous les utilisateurs (admin uniquement)
+- `GET /api/users/:id` - Récupérer un utilisateur spécifique (protégé)
+- `PUT /api/users/:id` - Mettre à jour un utilisateur (protégé)
+- `DELETE /api/users/:id` - Supprimer un utilisateur (admin uniquement)
+
+### Route de santé
+- `GET /health` - Vérifier l'état de l'API
+
+## Architecture
+
+L'application suit une architecture en couches :
+
+1. **Routes** (`/routes`) : Définition des endpoints API et routage des requêtes
+2. **Middleware** (`/middleware`) : 
+   - Authentification et autorisation
+   - Gestion des erreurs
+   - Validation des requêtes
+3. **Contrôleurs** (`/controllers`) : Gestion des requêtes HTTP et des réponses
+4. **Services** (`/services`) : Logique métier et interaction avec les modèles
+5. **Modèles** (`/models`) : Définition des schémas de données et interaction avec la base de données
+6. **Types** (`/types`) : Définitions TypeScript pour la typage statique
+7. **Utils** (`/utils`) : Fonctions utilitaires réutilisables
+
+L'API utilise :
+- Express.js
+- MongoDB
+- JWT pour l'authentification
+- TypeScript
+- Docker

@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 
 import { connectDB } from './config/database';
+import authRoutes from './routes/authRoutes';
 import userRoutes from './routes/userRoutes';
 import { errorHandler, notFound } from './middleware/errorHandler';
 
@@ -45,6 +46,7 @@ class App {
     });
 
     // Routes API
+    this.app.use('/api/auth', authRoutes);
     this.app.use('/api/users', userRoutes);
   }
 

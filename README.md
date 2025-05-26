@@ -16,6 +16,8 @@ cd myges-api
 
 2. Installez les dépendances :
 ```bash
+npx prisma init
+npx prisma generate
 npm install
 ```
 

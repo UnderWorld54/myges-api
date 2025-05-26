@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 export interface IUser {
   _id?: string;
   name: string;
@@ -56,4 +58,42 @@ declare global {
       user?: IUser;
     }
   }
+}
+
+// --- Ajout des entités principales ---
+
+export interface IAbsence {
+  _id?: string;
+  id_utilisateur: string | Types.ObjectId;
+  id_cours: string | Types.ObjectId;
+  etat: boolean;
+}
+
+export interface ICours {
+  _id?: string;
+  date_debut: Date;
+  date_fin: Date;
+  id_groupe: string | Types.ObjectId;
+  id_salle: string;
+  id_matiere: string | Types.ObjectId;
+}
+
+export interface IMatiere {
+  _id?: string;
+  id_intervenant: string | Types.ObjectId;
+  intitule: string;
+  nb_note?: number;
+}
+
+export interface IGroupe {
+  _id?: string;
+  intitule: string;
+}
+
+export interface INote {
+  _id?: string;
+  id_utilisateur: string | Types.ObjectId;
+  id_matiere: string | Types.ObjectId;
+  id_groupe: string | Types.ObjectId;
+  note: number;
 }

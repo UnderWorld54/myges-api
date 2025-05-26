@@ -7,6 +7,11 @@ import dotenv from 'dotenv';
 import { connectDB } from './config/database';
 import authRoutes from './routes/authRoutes';
 import userRoutes from './routes/userRoutes';
+import coursRoutes from './routes/coursRoutes';
+import matiereRoutes from './routes/matiereRoutes';
+import groupeRoutes from './routes/groupeRoutes';
+import absenceRoutes from './routes/absenceRoutes';
+import noteRoutes from './routes/noteRoutes';
 import { errorHandler, notFound } from './middleware/errorHandler';
 
 // Configuration
@@ -48,6 +53,11 @@ class App {
     // Routes API
     this.app.use('/api/auth', authRoutes);
     this.app.use('/api/users', userRoutes);
+    this.app.use('/api/cours', coursRoutes);
+    this.app.use('/api/matieres', matiereRoutes);
+    this.app.use('/api/groupes', groupeRoutes);
+    this.app.use('/api/absences', absenceRoutes);
+    this.app.use('/api/notes', noteRoutes);
   }
 
   private initializeErrorHandling(): void {

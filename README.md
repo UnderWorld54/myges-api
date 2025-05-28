@@ -199,6 +199,104 @@ Content-Type: application/json
 }
 ```
 
+### Notes
+
+#### Liste des notes (Admin uniquement)
+```http
+GET /api/notes
+Authorization: Bearer <token>
+```
+
+#### Détails d'une note
+```http
+GET /api/notes/:id
+Authorization: Bearer <token>
+```
+
+#### Création d'une note (Admin uniquement)
+```http
+POST /api/notes
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "id_utilisateur": "uuid-utilisateur",
+  "id_matiere": "uuid-matiere",
+  "id_groupe": "uuid-groupe",
+  "note": 15.5
+}
+```
+
+#### Mise à jour d'une note (Admin uniquement)
+```http
+PUT /api/notes/:id
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "note": 17.0
+}
+```
+
+#### Suppression d'une note (Admin uniquement)
+```http
+DELETE /api/notes/:id
+Authorization: Bearer <token>
+```
+
+### Absences
+
+#### Liste des absences (Admin uniquement)
+```http
+GET /api/absences
+Authorization: Bearer <token>
+```
+
+#### Détails d'une absence
+```http
+GET /api/absences/:id
+Authorization: Bearer <token>
+```
+
+#### Création d'une absence (Admin uniquement)
+```http
+POST /api/absences
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "id_utilisateur": "uuid-utilisateur",
+  "id_cours": "uuid-cours",
+  "etat": false
+}
+```
+
+#### Mise à jour d'une absence (Admin uniquement)
+```http
+PUT /api/absences/:id
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "etat": true
+}
+```
+
+#### Suppression d'une absence (Admin uniquement)
+```http
+DELETE /api/absences/:id
+Authorization: Bearer <token>
+```
+
+### Utilitaires
+
+#### Vérification de l'état de l'API
+```http
+GET /health
+```
+
+Retourne l'état de santé de l'API sans authentification requise.
+
 ## Tester l'API
 
 ### Avec cURL
@@ -220,6 +318,39 @@ curl -X POST http://localhost:3000/api/auth/login \
 3. Utiliser le token reçu pour les requêtes authentifiées :
 ```bash
 curl -X GET http://localhost:3000/api/users \
+  -H "Authorization: Bearer <votre-token>"
+```
+
+4. Tester l'état de l'API :
+```bash
+curl -X GET http://localhost:3000/health
+```
+
+5. Créer une note (Admin) :
+```bash
+curl -X POST http://localhost:3000/api/notes \
+  -H "Authorization: Bearer <votre-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"id_utilisateur":"uuid-utilisateur","id_matiere":"uuid-matiere","id_groupe":"uuid-groupe","note":15.5}'
+```
+
+6. Créer une absence (Admin) :
+```bash
+curl -X POST http://localhost:3000/api/absences \
+  -H "Authorization: Bearer <votre-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"id_utilisateur":"uuid-utilisateur","id_cours":"uuid-cours","etat":false}'
+```
+
+7. Lister les notes (Admin) :
+```bash
+curl -X GET http://localhost:3000/api/notes \
+  -H "Authorization: Bearer <votre-token>"
+```
+
+8. Lister les absences (Admin) :
+```bash
+curl -X GET http://localhost:3000/api/absences \
   -H "Authorization: Bearer <votre-token>"
 ```
 
@@ -266,6 +397,80 @@ curl -X GET http://localhost:3000/api/users \
                 }
               }
             }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notes",
+      "item": [
+        {
+          "name": "Create Note",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/notes",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id_utilisateur\":\"uuid-utilisateur\",\"id_matiere\":\"uuid-matiere\",\"id_groupe\":\"uuid-groupe\",\"note\":15.5}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Notes",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/notes",
+            "headers": {
+              "Authorization": "Bearer {{token}}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Absences",
+      "item": [
+        {
+          "name": "Create Absence",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/absences",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id_utilisateur\":\"uuid-utilisateur\",\"id_cours\":\"uuid-cours\",\"etat\":false}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Absences",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/absences",
+            "headers": {
+              "Authorization": "Bearer {{token}}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Get Health",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/health"
           }
         }
       ]

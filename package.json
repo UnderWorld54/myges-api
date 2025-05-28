@@ -8,8 +8,7 @@
     "start": "node dist/server.js",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
-    "docker:logs": "docker-compose logs -f",
-    "seed": "ts-node src/seeds/index.ts"
+    "docker:logs": "docker-compose logs -f"
   },
   "keywords": [],
   "author": "",

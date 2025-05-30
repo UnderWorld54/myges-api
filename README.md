@@ -15,11 +15,6 @@ git clone https://github.com/UnderWorld54/myges-api
 cd myges-api
 ```
 
-2. Installez les dépendances :
-```bash
-npm install
-```
-
 ## Configuration
 
 1. Créez un fichier `.env` à la racine du projet avec les variables d'environnement suivantes :

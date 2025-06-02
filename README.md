@@ -5,7 +5,6 @@
 - Node.js (version recommandée : 18 ou supérieure)
 - npm ou yarn
 - Docker et Docker Compose (pour l'environnement de développement)
-- PostgreSQL (pour la base de données)
 
 ## Installation
 
